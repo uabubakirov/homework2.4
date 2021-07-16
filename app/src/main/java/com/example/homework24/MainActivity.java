@@ -13,7 +13,7 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
     Button btnChange;
-    boolean isGame = true;
+    int id = 1;
 
 
     @Override
@@ -31,16 +31,27 @@ public class MainActivity extends AppCompatActivity {
 
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-                 if (isGame){
-                      transaction.replace(R.id.fragment_container, FirstFragment.newInstance("ajja", "port"));
-                      isGame = false;
-                      transaction.addToBackStack("First");
-                 }
-                   else {
-                       transaction.replace(R.id.fragment_container, SecondFragment.newInstance("ahah", "poui"));
-                       isGame = true;
-                       transaction.addToBackStack("First");
-                 }
+                switch (id) {
+                    case 1:
+                        transaction.replace(R.id.fragment_container,FirstFragment.class, null);
+                        transaction.addToBackStack("FirstFragment");
+                        id++;
+                        break;
+                    case 2:
+                        transaction.replace(R.id.fragment_container,SecondFragment.class,null);
+                        transaction.addToBackStack("SecondFragment");
+                        id++;
+                        break;
+                    case 3:
+                        transaction.replace(R.id.fragment_container,ThirdFragment.class,null);
+                        transaction.addToBackStack("TrirdFragment");
+                        id=1;
+                        break;
+
+                }
+
+
+
 
                    transaction.commit();
 
